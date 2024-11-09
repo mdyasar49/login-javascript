@@ -1,0 +1,50 @@
+<div id="myform">
+    <h4>Fill the below form:</h4>
+    <label>Name:</label>
+    <input type="text" id="name"><br><br>
+    <label>Gender:</label>
+    <input type="text" id="gender"><br><br>
+    <label>Designation:</label>
+    <input type="text" id="designation"><br><br>
+    <label>Joining Date:</label>
+    <input type="date" id="date"><br><br>
+    <button id="add" value="Add" onclick="addTableRow()">Add Data to Table</button>
+  </div>
+  
+  <div>
+    <h4>Employee Record</h4>
+    <center>
+      <table id="tableData" border="1" >
+        <tr>
+          <td><b>Name</b></td>
+          <td><b>Gender</b></td>
+          <td><b>Designation</b></td>
+          <td><b>Joining Date</b></td>
+        </tr>
+      </table>
+    </center>
+  </div>
+  
+  <script>
+    var employeeData = [];
+  
+    function addTableRow() {
+      var name = document.getElementById("name").value;
+      var gender = document.getElementById("gender").value;
+      var designation = document.getElementById("designation").value;
+      var date = document.getElementById("date").value;
+      
+      var employee = [name, gender, designation, date];
+      employeeData.push(employee);
+      
+      var table = document.getElementById("tableData");
+      var x = table.rows.length;
+      var row = table.insertRow(x);
+      
+      for (var i = 0; i < employee.length; i++) {
+        var data = row.insertCell(i);
+        data.textContent = employee[i];
+      }
+    }
+  </script>
+  

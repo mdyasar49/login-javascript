@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Login Page </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2><center> Login Page </center></h2>
+    <form id="login-page">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+      </div>
+      <div id="set">
+        <i id="see" class="far fa-eye"></i>
+      </div>
+      <div id="check0">
+        <span>At least one special character (!@#$%^&amp;*(),.?":{}|&lt;&gt;)</span>
+      </div>
+      <div id="check1">
+        <span>At least one number (0-9)</span>
+      </div>
+      <div id="check2">
+        <span>At least one alphabetic word(a-zA-Z)</span>
+      </div>
+      <div class="form-group">
+        <button type="submit">Login</button> 
+      </div>
+    </form>
+    <div id="error-msg" class="error-message"></div>
+  </div>
+
+  <script>
+    document.getElementById('login-page').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+
+      var emailRegex = /^\S+@\S+\.\S+$/;
+     
+      var specialChars = /[!@#$%^&*(),.?":{}|<>]/;
+      var numbers = /[0-9]/;
+      var alphabetic = /[a-zA-Z]/;
+
+      if (email !== password){
+        var errorMessage = document.getElementById('error-msg');
+        errorMessage.textContent = 'Email and password could not  be the same.';
+
+      } else if (!emailRegex.test(email)) {
+        var errorMessage = document.getElementById('error-msg');
+        errorMessage.textContent = 'Invalid email address.';
+
+      } else if (!specialChars.test(password)) {
+        var errorMessage = document.getElementById('error-msg');
+        errorMessage.textContent = 'Password must contain at least one special character.';
+      
+      } else if (!numbers.test(password)) {
+        var errorMessage = document.getElementById('error-msg');
+        errorMessage.textContent = 'Password must contain at least one number.';
+      
+      } else if (!alphabetic.test(password)) {
+        var errorMessage = document.getElementById('error-msg');
+        errorMessage.textContent = 'Password must contain at least one alphabetic word.';
+      
+      } else {
+        window.alert('Login successful!');
+        window.location.href = 'home.html'; 
+      }
+    });
+
+    // Toggle password visibility
+    var passwordInput = document.getElementById('password');
+    var eyeIcon = document.getElementById('see');
+    eyeIcon.addEventListener('click', function() {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+      }
+    });
+  </script>
+</body>
+</html>
